@@ -1,4 +1,5 @@
 # Advent of Code Solutions in go
+https://adventofcode.com/
 
 Project to learn go and vim motions :)
 
@@ -12,3 +13,5 @@ Project to learn go and vim motions :)
 take quite a lot of lines in go
 * I miss anonymous function from scala / lambda functions from python
 * The forced error handling seems like a good practice. I hope it does not get annoying
+
+### Vim motions related
