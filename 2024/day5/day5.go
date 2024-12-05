@@ -90,13 +90,16 @@ func part2(lines []string) {
 		//2) I could check every newly created pair again with their new neighbor
 		//3) I could also just move backwards to the start if I switched something and stop the row if I reach the end without switching
 		switched := false
-		for k := 0; k < len(input); k++ { //Option 1 First I think this is inefficient but will work
+		i := 0
+		for i < len(input) { //Option 1 First I think this is inefficient but will work do this x times if nothing was changed exit
+			sorted := false
 			for j := 0; j < len(input)-1; j++ {
 				num1 := input[j]
 				num2 := input[j+1]
 				//fmt.Printf("++Pair %d,%d\n", num1, num2)
 				for _, rule := range rules {
 					if num2 == rule[0] && num1 == rule[1] {
+						sorted = true
 						switched = true
 						temp := input[j]
 						input[j] = input[j+1]
@@ -104,6 +107,9 @@ func part2(lines []string) {
 						//fmt.Printf("+Input is now %v\n", input)
 					}
 				}
+			}
+			if sorted == false {
+				break
 			}
 		}
 		if switched == true {
