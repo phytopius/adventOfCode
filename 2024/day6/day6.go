@@ -46,9 +46,9 @@ func part1(grid [][]string) {
 	fmt.Printf("Start Position is %d, %d\n", startRow, startCol)
 
 	charOnMap := true
-	directions := ([4]string{"up", "right", "down", "left"})
+	directions := ([4]DIRECTION{UP, RIGHT, DOWN, LEFT})
 	directionPosition := 0
-	direction := "up"
+	direction := UP
 	nextRow, nextCol := startRow, startCol
 
 	uniqueFieldsVisited := 1
@@ -58,13 +58,13 @@ func part1(grid [][]string) {
 		currentCol := nextCol
 		nextFieldValue := ""
 		switch direction {
-		case "up":
+		case UP:
 			nextRow--
-		case "down":
+		case DOWN:
 			nextRow++
-		case "left":
+		case LEFT:
 			nextCol--
-		case "right":
+		case RIGHT:
 			nextCol++
 		}
 		if nextRow < 0 || nextRow >= len(grid) || nextCol < 0 || nextCol >= len(grid[0]) {
@@ -95,7 +95,7 @@ func part2(gird [][]string) {
 }
 func main() {
 	fmt.Println("Starting day")
-	grid := adventOfCode.ReadFileAsGrid("./input.txt")
+	grid := adventOfCode.ReadFileAsGrid("./testinput.txt")
 	part1(grid)
 	part2(grid)
 }
