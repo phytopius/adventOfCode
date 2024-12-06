@@ -78,10 +78,7 @@ func part1(grid [][]string) {
 			uniqueFieldsVisited++
 			gameMap[[2]int{nextRow, nextCol}] = "X"
 		case "#":
-			directionPosition++
-			if directionPosition == 4 {
-				directionPosition = 0
-			}
+			directionPosition = (directionPosition + 1) % len(directions)
 			direction = directions[directionPosition]
 			nextRow = currentRow
 			nextCol = currentCol
