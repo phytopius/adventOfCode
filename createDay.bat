@@ -20,4 +20,4 @@ echo. > .\%year%\%day%\testinput.txt
 :: Copy main.go to the new directory and rename it as day.go
 copy .\template\main.go .\%year%\%day%\%day%.go
 
-echo Folder and files created successfully under .\%year%\%day\
+echo Folder and files created successfully under .\%year%\%day%\
