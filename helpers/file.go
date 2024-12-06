@@ -26,3 +26,18 @@ func ReadFileLineByLine(path string) []string {
 
 	return output
 }
+
+func ReadFileAsGrid(path string) [][]string {
+	lines := ReadFileLineByLine(path)
+
+	grid := [][]string{}
+
+	for _, line := range lines {
+		tempRow := []string{}
+		for _, element := range line {
+			tempRow = append(tempRow, string(element))
+		}
+		grid = append(grid, tempRow)
+	}
+	return grid
+}
