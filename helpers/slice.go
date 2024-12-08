@@ -25,3 +25,9 @@ func FindIndex[T comparable](slice []T, target T) int {
 	}
 	return -1
 }
+
+func PrintGrid(grid [][]string) {
+	for _, row := range grid {
+		fmt.Println(row)
+	}
+}
