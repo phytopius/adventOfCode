@@ -27,12 +27,10 @@ func part1(grid [][]string) {
 			}
 		}
 	}
-	fmt.Println(antennaBuckets)
 
 	antennaMap := make(map[[2]int]bool)
 	gridSize := len(grid)
-	for key, value := range antennaBuckets {
-		fmt.Printf("Handling key %s\n", key)
+	for _, value := range antennaBuckets {
 		for i := 0; i < len(value); i++ {
 			for j := 1; j < len(value); j++ {
 				if i != j {
@@ -42,21 +40,16 @@ func part1(grid [][]string) {
 
 					ex, ey := ax-dx, ay-dy
 					fx, fy := bx+dx, by+dy
-					fmt.Printf("Got a Pair\n")
 					if isPositionValid(ex, ey, gridSize) {
 						antennaMap[[2]int{ex, ey}] = true
-						fmt.Printf("Adding antenna 1 at %d, %d\n", ex, ey)
 					}
 					if isPositionValid(fx, fy, gridSize) {
 						antennaMap[[2]int{fx, fy}] = true
-						fmt.Printf("Adding antenna 2 at %d, %d\n", fx, fy)
 					}
 				}
 			}
 		}
 	}
-	fmt.Println("########")
-	fmt.Println(antennaMap)
 	fmt.Printf("Found %d unique antenna positions\n", len(antennaMap))
 }
 
@@ -65,18 +58,16 @@ func part2(grid [][]string) {
 
 	antennaBuckets := make(map[string][][2]int)
 	for i, row := range grid {
-		for j, _ := range row {
+		for j := range row {
 			if grid[i][j] != "." {
 				antennaBuckets[grid[i][j]] = append(antennaBuckets[grid[i][j]], [2]int{i, j})
 			}
 		}
 	}
-	fmt.Println(antennaBuckets)
 
 	antennaMap := make(map[[2]int]bool)
 	gridSize := len(grid)
-	for key, value := range antennaBuckets {
-		fmt.Printf("Handling key %s\n", key)
+	for _, value := range antennaBuckets {
 		for i := 0; i < len(value); i++ {
 			for j := 1; j < len(value); j++ {
 				if i != j {
@@ -96,7 +87,6 @@ func part2(grid [][]string) {
 						ex, ey := ax-(negCounter*dx), ay-(negCounter*dy)
 						if isPositionValid(ex, ey, gridSize) {
 							antennaMap[[2]int{ex, ey}] = true
-							fmt.Printf("Adding antenna 1 at %d, %d\n", ex, ey)
 							negCounter++
 						} else {
 							break
@@ -109,7 +99,6 @@ func part2(grid [][]string) {
 						fx, fy := bx+(posCounter*dx), by+(posCounter*dy)
 						if isPositionValid(fx, fy, gridSize) {
 							antennaMap[[2]int{fx, fy}] = true
-							fmt.Printf("Adding antenna 2 at %d, %d\n", fx, fy)
 							posCounter++
 						} else {
 							break
@@ -119,8 +108,6 @@ func part2(grid [][]string) {
 			}
 		}
 	}
-	fmt.Println("########")
-	fmt.Println(antennaMap)
 	fmt.Printf("Found %d unique antenna positions\n", len(antennaMap))
 }
 
