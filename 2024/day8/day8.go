@@ -85,11 +85,13 @@ func part2(grid [][]string) {
 					dx, dy := bx-ax, by-ay
 
 					//weird but also the antennas are antinodes now
-					antennaMap[[2]int{ax, ay}] = true
-					antennaMap[[2]int{bx, by}] = true
+					//antennaMap[[2]int{ax, ay}] = true
+					//antennaMap[[2]int{bx, by}] = true
+					//can also just start loop from 0 instead of 1 to add original antenna position :)
+
 					//keep adding antennas until we hit the edge
 					//negative loop
-					negCounter := 1
+					negCounter := 0
 					for {
 						ex, ey := ax-(negCounter*dx), ay-(negCounter*dy)
 						if isPositionValid(ex, ey, gridSize) {
@@ -102,7 +104,7 @@ func part2(grid [][]string) {
 					}
 
 					//positive loop
-					posCounter := 1
+					posCounter := 0
 					for {
 						fx, fy := bx+(posCounter*dx), by+(posCounter*dy)
 						if isPositionValid(fx, fy, gridSize) {
