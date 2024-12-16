@@ -41,3 +41,26 @@ func ReadFileAsGrid(path string) [][]string {
 	}
 	return grid
 }
+
+func ReadFileAsMap(path string) map[[2]int]string {
+	lines := ReadFileLineByLine(path)
+
+	mapGrid := make(map[[2]int]string)
+
+	for i, line := range lines {
+		for j, element := range line {
+			mapGrid[[2]int{i, j}] = string(element)
+		}
+	}
+	return mapGrid
+}
+
+func convertGridToCoordinateMap(grid [][]string) map[[2]int]string {
+	mapGrid := make(map[[2]int]string)
+	for i := range len(grid) {
+		for j := range len(grid[i]) {
+			mapGrid[[2]int{i, j}] = grid[i][j]
+		}
+	}
+	return mapGrid
+}
