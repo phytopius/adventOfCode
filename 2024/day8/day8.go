@@ -60,14 +60,72 @@ func part1(grid [][]string) {
 	fmt.Printf("Found %d unique antenna positions\n", len(antennaMap))
 }
 
-func part2(lines []string) {
+func part2(grid [][]string) {
 	fmt.Println("## Part2")
+
+	antennaBuckets := make(map[string][][2]int)
+	for i, row := range grid {
+		for j, _ := range row {
+			if grid[i][j] != "." {
+				antennaBuckets[grid[i][j]] = append(antennaBuckets[grid[i][j]], [2]int{i, j})
+			}
+		}
+	}
+	fmt.Println(antennaBuckets)
+
+	antennaMap := make(map[[2]int]bool)
+	gridSize := len(grid)
+	for key, value := range antennaBuckets {
+		fmt.Printf("Handling key %s\n", key)
+		for i := 0; i < len(value); i++ {
+			for j := 1; j < len(value); j++ {
+				if i != j {
+					ax, ay := value[i][0], value[i][1]
+					bx, by := value[j][0], value[j][1]
+					dx, dy := bx-ax, by-ay
+
+					//weird but also the antennas are antinodes now
+					antennaMap[[2]int{ax, ay}] = true
+					antennaMap[[2]int{bx, by}] = true
+					//keep adding antennas until we hit the edge
+					//negative loop
+					negCounter := 1
+					for {
+						ex, ey := ax-(negCounter*dx), ay-(negCounter*dy)
+						if isPositionValid(ex, ey, gridSize) {
+							antennaMap[[2]int{ex, ey}] = true
+							fmt.Printf("Adding antenna 1 at %d, %d\n", ex, ey)
+							negCounter++
+						} else {
+							break
+						}
+					}
+
+					//positive loop
+					posCounter := 1
+					for {
+						fx, fy := bx+(posCounter*dx), by+(posCounter*dy)
+						if isPositionValid(fx, fy, gridSize) {
+							antennaMap[[2]int{fx, fy}] = true
+							fmt.Printf("Adding antenna 2 at %d, %d\n", fx, fy)
+							posCounter++
+						} else {
+							break
+						}
+					}
+				}
+			}
+		}
+	}
+	fmt.Println("########")
+	fmt.Println(antennaMap)
+	fmt.Printf("Found %d unique antenna positions\n", len(antennaMap))
 }
+
 func main() {
 	fmt.Println("Starting day")
 	inputFilePath := "./input.txt"
-	lines := adventOfCode.ReadFileLineByLine(inputFilePath)
 	mapGrid := adventOfCode.ReadFileAsGrid(inputFilePath)
 	part1(mapGrid)
-	part2(lines)
+	part2(mapGrid)
 }
