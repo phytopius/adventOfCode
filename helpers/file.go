@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"log"
 	"os"
+	"strconv"
 )
 
 func ReadFileLineByLine(path string) []string {
@@ -40,6 +41,23 @@ func ReadFileAsGrid(path string) [][]string {
 		grid = append(grid, tempRow)
 	}
 	return grid
+}
+
+func ConvertStringGridToIntGrid(stringGrid [][]string) [][]int {
+	intGrid := [][]int{}
+
+	for _, row := range stringGrid {
+		intRow := []int{}
+		for _, v := range row {
+			intValue, err := strconv.Atoi(v)
+			if err != nil {
+				log.Fatal("Error during int conversion")
+			}
+			intRow = append(intRow, intValue)
+		}
+		intGrid = append(intGrid, intRow)
+	}
+	return intGrid
 }
 
 func ReadFileAsMap(path string) map[[2]int]string {
