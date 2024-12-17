@@ -38,8 +38,7 @@ func part1(lines []string) {
 				midpoint := digitCount / 2
 				num1, _ := strconv.Atoi(numberAsString[0:midpoint])
 				num2, _ := strconv.Atoi(numberAsString[midpoint:])
-				input[j] = num1
-				input = append(input[0:j+1], append([]int{num2}, input[j+1:]...)...)
+				input = append(input[0:j], append([]int{num1, num2}, input[j+1:]...)...)
 
 				j++
 			} else {
@@ -47,6 +46,7 @@ func part1(lines []string) {
 			}
 		}
 	}
+	fmt.Println(input)
 	fmt.Printf("Number of Stones %d\n", len(input))
 }
 
@@ -56,7 +56,8 @@ func part2(lines []string) {
 func main() {
 	fmt.Println("Starting day")
 
-	lines := adventOfCode.ReadFileLineByLine("./input.txt")
+	lines := adventOfCode.ReadFileLineByLine("./testinput.txt")
+	//lines = []string{"125 17 12 1 0"}
 	part1(lines)
 	part2(lines)
 }
