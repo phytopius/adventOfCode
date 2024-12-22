@@ -22,13 +22,15 @@ type Game struct {
 	Prize   Coordinate
 }
 
-const MaxButton = 100
+const MaxButton = 99999
 
 func part1(games []Game) {
 	fmt.Println("## Part1")
 
 	cost := 0
 	for _, game := range games {
+		game.Prize.x += 10000000000000
+		game.Prize.y += 10000000000000
 		currentPos := Coordinate{0, 0}
 		currentCost := math.MaxInt
 		for i := 0; i < MaxButton; i++ {
@@ -57,6 +59,8 @@ func part1_b(games []Game) {
 	fmt.Println("## Part1 b")
 	cost := 0
 	for _, game := range games {
+		game.Prize.x += 10000000000000
+		game.Prize.y += 10000000000000
 		nA := (game.Prize.x*game.ButtonB.y - game.Prize.y*game.ButtonB.x) / (game.ButtonA.x*game.ButtonB.y - game.ButtonA.y*game.ButtonB.x)
 		nB := (game.ButtonA.x*game.Prize.y - game.ButtonA.y*game.Prize.x) / (game.ButtonA.x*game.ButtonB.y - game.ButtonA.y*game.ButtonB.x)
 		if nA*game.ButtonA.x+nB*game.ButtonB.x == game.Prize.x && nA*game.ButtonA.y+nB*game.ButtonB.y == game.Prize.y {
@@ -108,5 +112,5 @@ func main() {
 	fmt.Println(len(games))
 
 	part1(games)
-	part1_b(games)
+	//part1_b(games)
 }
