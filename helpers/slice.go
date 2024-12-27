@@ -31,3 +31,13 @@ func PrintGrid(grid [][]string) {
 		fmt.Println(row)
 	}
 }
+
+func ConvertGridToMap[T comparable](grid [][]T) map[[2]int]T {
+	outputMap := map[[2]int]T{}
+	for r, row := range grid {
+		for c, col := range row {
+			outputMap[[2]int{r, c}] = col
+		}
+	}
+	return outputMap
+}
